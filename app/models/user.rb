@@ -62,4 +62,7 @@ class User
 
   property :name, type: String
 
+  # Association
+  has_many :out, :tweet, type: :tweeted
+
 end
