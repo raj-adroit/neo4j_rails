@@ -1,5 +1,7 @@
 class User 
   include Neo4j::ActiveNode
+  include Neo4jrb::Paperclip
+
     #
     # Neo4j.rb needs to have property definitions before any validations. So, the property block needs to come before
     # loading your devise modules.
@@ -8,6 +10,7 @@ class User
     # uncomment the property definitions for those modules. Otherwise, the unused property definitions can be deleted.
     #
 
+     property :name, type: String
      property :username, :type =>   String
      property :facebook_token, :type => String
      index :facebook_token
@@ -34,11 +37,11 @@ class User
      property :reset_password_sent_at, :type =>   DateTime
 
      ## Trackable
-     property :sign_in_count, :type => Integer, :default => 0
-     property :current_sign_in_at, :type => DateTime
-     property :last_sign_in_at, :type => DateTime
-     property :current_sign_in_ip, :type =>  String
-     property :last_sign_in_ip, :type => String
+     #property :sign_in_count, :type => Integer, :default => 0
+     #property :current_sign_in_at, :type => DateTime
+     #property :last_sign_in_at, :type => DateTime
+     #property :current_sign_in_ip, :type =>  String
+     #property :last_sign_in_ip, :type => String
 
      ## Confirmable
      # property :confirmation_token
@@ -58,11 +61,14 @@ class User
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :validatable #   :trackable,
 
-  property :name, type: String
 
   # Association
   has_many :out, :tweet, type: :tweeted
+
+  # Paperclip 
+  has_neo4jrb_attached_file :avatar, :styles => { :small => "150x150>", :thumb => "50x50" }
+  validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/jpg', 'image/png'] 
 
 end

@@ -31,11 +31,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
   gem 'quiet_assets'
+  gem 'webrick', '~> 1.3.1'
 end
 
 gem "slim-rails"
 gem "devise-neo4j"
 gem "twitter-bootstrap-rails"
+gem "neo4jrb-paperclip", :require => "neo4jrb_paperclip"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
