@@ -6,4 +6,6 @@ class Tweet
 
   has_one :in, :user, type: :tweeted
 
+  validates :message, presence: true
+
 end

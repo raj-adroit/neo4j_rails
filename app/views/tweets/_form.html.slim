@@ -7,9 +7,6 @@
           li = message
 
   .field
-    = f.label :message
-    = f.text_area :message
-  .field
-    = f.label :user
-    = f.select :user, options_from_collection_for_select(User.all,:id,:email, @tweet.user.try(:id))
-  .actions = f.submit
+    = f.text_area :message, rows:4, class: "form-control"
+  .actions.float_right
+    = f.submit "Tweet", class: "btn btn-primary"

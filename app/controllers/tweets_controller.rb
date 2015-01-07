@@ -6,6 +6,11 @@ class TweetsController < ApplicationController
   respond_to :html
 
   def index
+    @tweets = current_user.tweets
+    @tweet = Tweet.new
+  end
+
+  def temp
     @tweets = Tweet.all
     respond_with(@tweets)
   end
@@ -25,8 +30,12 @@ class TweetsController < ApplicationController
 
   def create
     @tweet = Tweet.new(tweet_params)
-    @tweet.save
-    respond_with(@tweet)
+    if @tweet.save
+      @tweet.user = current_user
+      redirect_to action: :index
+    else
+      respond_with(@tweet)
+    end
   end
 
   def update

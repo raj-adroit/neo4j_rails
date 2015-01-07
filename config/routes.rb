@@ -6,12 +6,16 @@ Rails.application.routes.draw do
 
   resources :users
 
+
+  get 'tweets/home' => "tweets#home"
   resources :tweets
   
   get 'home/index' => "home#index"
 
 
   root 'home#index'
+
+  post 'users/follow/:user' => "users#follow", as: :follow
 
 
   # The priority is based upon order of creation: first created -> highest priority.

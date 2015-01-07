@@ -38,6 +38,12 @@ class UsersController < ApplicationController
     respond_with(@user)
   end
 
+  def follow
+    current_user.following << params[:user]
+    render :js => ""
+  end
+
+
   private
     def set_user
       @user = User.find(params[:id])

@@ -1,21 +1,16 @@
-h1 Listing users
-
-table
-  thead
-    tr
-      th Name
-      th
-      th
-      th
-
-  tbody
+.row
+  .col-lg-1
+  .col-lg-10.well
+    h2 Users
+    hr
     - @users.each do |user|
-      tr
-        td = user.name
-        td = link_to 'Show', user
-        td = link_to 'Edit', edit_user_path(user)
-        td = link_to 'Destroy', user, data: {:confirm => 'Are you sure?'}, :method => :delete
+      .row
+        .col-lg-3
+          = image_tag user.avatar(:small), size: "80x80", class: "img-thumbnail"
+        .col-lg-5
+          p.lead= user.full_name
+          = user.email
+        .col-lg-offset-3
+        = button_to "Follow", { :controller => :users, :action=> :follow, :user => user}, { :remote => true, :class => "btn btn-primary" }
+      hr
 
-br
-
-= link_to 'New User', new_user_path

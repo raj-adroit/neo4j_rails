@@ -1,23 +1,34 @@
-h1 Listing tweets
-=  image_tag current_user.avatar.url(:small)
-
-
-table
-  thead
-    tr
-      th Message
-      th
-      th
-      th
-
-  tbody
-    - @tweets.each do |tweet|
+.row.well
+  .col-lg-3
+    = image_tag current_user.avatar(:small), class: "img-thumbnail"
+    h4= current_user.full_name
+    table.table.table-bordered
       tr
-        td = tweet.message
-        td = link_to 'Show', tweet
-        td = link_to 'Edit', edit_tweet_path(tweet)
-        td = link_to 'Destroy', tweet, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th Tweets
+        th Following
+        th Followers
+      tr
+        td = @tweets.count
+        td = current_user.following.count
+        td = current_user.followers.count
+  .col-lg-8.well
+    == render 'form'
+    br
+    h4 Tweets
+    hr
+    - @tweets.each do |tweet|
+      .row
+        .col-lg-1
+          = image_tag tweet.user.avatar(:thumb), class: "img-thumbnail"
+        .col-lg-7
+          .row
+            strong= tweet.user.full_name
+            = "  - #{tweet.updated_at.strftime('%b %d')}" if tweet.updated_at.present?
+          .row
+            p.lead= tweet.message
+      br
+      hr
+    - if @tweets.empty?
+      p.lead.text-warning Write a tweet to getting started
 
-br
 
-= link_to 'New Tweet', new_tweet_path

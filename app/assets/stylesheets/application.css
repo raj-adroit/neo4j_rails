@@ -13,3 +13,21 @@
  *= require_tree .
  *= require_self
  */
+
+.well {
+  background-color: white;
+}
+
+.nav_bar_float_left {
+  float:right !important;
+}
+
+.float_right {
+  float: right !important;
+}
+
+.background_gray {
+  background-color: #e7e7e7;
+}
+
+

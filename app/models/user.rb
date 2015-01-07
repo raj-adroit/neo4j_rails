@@ -65,10 +65,23 @@ class User
 
 
   # Association
-  has_many :out, :tweet, type: :tweeted
+  has_many :out, :tweets, type: :tweeted
+
+  [[:both, :follows], [:out, :following], [:in, :followers]].each do |dir, assoc|
+    has_many dir, assoc, type: :following, model_class: 'User'
+  end
+  # User.following.to_cypher
+  # User.followers.to_cypher
+  # User.follows.to_cypher
 
   # Paperclip 
   has_neo4jrb_attached_file :avatar, :styles => { :small => "150x150>", :thumb => "50x50" }
   validates_attachment_content_type :avatar, :content_type => ['image/jpeg', 'image/jpg', 'image/png'] 
+
+  # Model methods
+
+  def full_name
+    name.present?  ? name : email
+  end
 
 end
