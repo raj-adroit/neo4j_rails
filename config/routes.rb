@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   post 'users/follow/:user' => "users#follow", as: :follow
+  post 'users/unfollow/:user' => "users#unfollow", as: :unfollow
 
 
   # The priority is based upon order of creation: first created -> highest priority.

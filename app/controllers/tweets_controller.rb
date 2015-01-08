@@ -6,6 +6,8 @@ class TweetsController < ApplicationController
   respond_to :html
 
   def index
+   # @tweets = current_user.tweets
+    @user_tweets = current_user.following.tweets
     @tweets = current_user.tweets
     @tweet = Tweet.new
   end

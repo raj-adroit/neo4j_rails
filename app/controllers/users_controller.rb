@@ -38,9 +38,22 @@ class UsersController < ApplicationController
     respond_with(@user)
   end
 
+  # create follow relationship
   def follow
-    current_user.following << params[:user]
-    render :js => ""
+    user = User.find(params[:user])
+    unless current_user.following.include?(user)
+      current_user.following << user
+    end
+    render :js => "window.location = '/users'"
+  end
+
+  # delete relationship between two nodes
+  def unfollow 
+    user = User.find(params[:user])
+    if current_user.following.include?(user)
+      current_user.following(:user, :rel).match_to(user).delete_all(:rel)
+    end
+    render :js => "window.location = '/users'"
   end
 
 

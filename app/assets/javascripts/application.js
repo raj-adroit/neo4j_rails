@@ -15,3 +15,16 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function(){
+  $(".unfollow").mouseover(function() {
+    $(this).val("Unfollow");
+    $(this).addClass("btn-danger");
+    $(this).removeClass("btn-success");
+  });
+   $(".unfollow").mouseout(function() {
+    $(this).val("Following");
+    $(this).addClass("btn-success");
+    $(this).removeClass("btn-danger");
+  });
+});

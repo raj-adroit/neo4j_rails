@@ -33,7 +33,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'webrick', '~> 1.3.1'
 end
-
+gem "rails_autolink"
 gem "slim-rails"
 gem "devise-neo4j"
 gem "twitter-bootstrap-rails"

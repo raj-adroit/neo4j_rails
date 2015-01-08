@@ -16,6 +16,18 @@
     br
     h4 Tweets
     hr
+    - @user_tweets.each do |tweet|
+      .row
+        .col-lg-1
+          = image_tag tweet.user.avatar(:thumb), class: "img-thumbnail"
+        .col-lg-7
+          .row
+            strong= tweet.user.full_name
+            = "  - #{tweet.updated_at.strftime('%b %d')}" if tweet.updated_at.present?
+          .row.links
+            p.lead=simple_format auto_link tweet.message
+      br
+      hr
     - @tweets.each do |tweet|
       .row
         .col-lg-1
@@ -24,8 +36,8 @@
           .row
             strong= tweet.user.full_name
             = "  - #{tweet.updated_at.strftime('%b %d')}" if tweet.updated_at.present?
-          .row
-            p.lead= tweet.message
+          .row.links
+            p.lead=simple_format auto_link tweet.message
       br
       hr
     - if @tweets.empty?
