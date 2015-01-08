@@ -5,6 +5,14 @@ class TweetsController < ApplicationController
 
   respond_to :html
 
+  def home
+    @user = User.find(params[:user]) || current_user
+    #@user = user || current_user
+    @user_tweets = @user.following.tweets
+    @tweets = @user.tweets
+    @tweet = Tweet.new
+  end
+
   def index
    # @tweets = current_user.tweets
     @user_tweets = current_user.following.tweets
@@ -34,7 +42,7 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new(tweet_params)
     if @tweet.save
       @tweet.user = current_user
-      redirect_to action: :index
+      redirect_to action: :home
     else
       respond_with(@tweet)
     end

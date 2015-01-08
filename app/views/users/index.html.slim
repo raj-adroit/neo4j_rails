@@ -9,7 +9,7 @@
         .col-lg-3
           = image_tag user.avatar(:small), size: "80x80", class: "img-thumbnail"
         .col-lg-5
-          p.lead= user.full_name
+          p.lead.links= link_to user.full_name,tweets_home_path(user)
           = user.email
         .col-lg-offset-3
         - if current_user.following.include?(user)

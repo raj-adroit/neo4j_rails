@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :users
 
 
-  get 'tweets/home' => "tweets#home"
+  get 'tweets/home(/:user)' => "tweets#home", as: :tweets_home
   resources :tweets
   
   get 'home/index' => "home#index"
